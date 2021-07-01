@@ -6,7 +6,7 @@
 * - [x] The app is writing periodically a log message for every 10 seconds
 * - [x] The message should contain the current time and a random string of your choice
 
-- [ ] 3. Build the app into an Docker image and let it run in a container
+- [x] 3. Build the app into an Docker image and let it run in a container
 
 - [ ] 4.Define a `deployment.yaml` with your app to run it in k8s
 * - [ ] Play with it in K8S
