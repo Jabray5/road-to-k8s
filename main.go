@@ -2,28 +2,29 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"time"
 )
 
-const SLEEPTIME int = 10
-const LOGSTRING string = "A random string of your choice."
+const SLEEPTIME int = 3
+const LOGSTRING string = "A random string!"
 
 func main() {
 
+	// FOR CREATING A LOG.TXT FILE
 	// Get the log file, or create one if it doesn't exist
-	file, err := os.OpenFile("./log.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.SetOutput(file)
+	// file, err := os.OpenFile("./log.txt", os.O_APPEND|os.O_CREATE|os.O_RDWR, 0666)
+	// if err != nil {
+	// 	fmt.Println("Error", err)
+	// 	log.Fatal(err)
+	// }
+	// log.SetOutput(file)
 
 	// Loop indefinitely
 	for {
 		wait()
-		log.Println(LOGSTRING)
-		fmt.Println("Log added.")
+		t := time.Now()
+		zone, _ := t.Zone()
+		fmt.Printf("%v-%v-%v %v:%v:%v %v - %v\n", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), t.Second(), zone, LOGSTRING)
 	}
 }
 
