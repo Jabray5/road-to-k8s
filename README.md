@@ -8,8 +8,8 @@
 
 - [x] 3. Build the app into an Docker image and let it run in a container
 
-- [ ] 4.Define a `deployment.yaml` with your app to run it in k8s
-* - [ ] Play with it in K8S
+- [x] 4.Define a `deployment.yaml` with your app to run it in k8s
+* - [x] Play with it in K8S
 
 - [ ] 5. Add an API that meets the following requirements:
 * - [ ] Disable the log statements from task 1 with a boolean environment variable
