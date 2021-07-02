@@ -6,6 +6,7 @@ metadata:
   labels:
     app: logger-deployment
 spec:
+  replicas: 3
   progressDeadlineSeconds: 20
   selector:
     matchLabels:
