@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"./api"
+	"github.com/Jabray5/road-to-k8s/api"
 )
 
 const SLEEPTIME int = 10
@@ -14,13 +14,14 @@ var enableLogging bool = true
 
 func main() {
 
+	api.StartListening()
+
 	// Loop indefinitely
 	for {
 		if enableLogging {
 			logTime()
 			wait()
 		}
-		api.StartListening()
 
 		// if newMessage {
 		// 	// log the new message

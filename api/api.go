@@ -12,7 +12,7 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 
 func handleRequests() {
 	http.HandleFunc("/", homepage)
-	log.Fatal(http.ListenAndServe("8081", nil))
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
 
 func StartListening() {
