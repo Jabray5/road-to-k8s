@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
@@ -11,6 +12,15 @@ import (
 type TimeResponse struct {
 	Time string `json:"time"`
 	Date string `json:"date"`
+}
+
+type StoryPost struct {
+	Story string `json:"message"`
+}
+
+type StoryResponse struct {
+	Success bool   `json:"success"`
+	Message string `json:"message"`
 }
 
 func homepage(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +38,20 @@ func getTime(w http.ResponseWriter, r *http.Request) {
 }
 
 func story(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "story endpoint hit")
+	reqBody, _ := ioutil.ReadAll(r.Body)
+
+	var storyPost StoryPost
+
+	err := json.Unmarshal(reqBody, &storyPost)
+
+	if err != nil {
+		fmt.Fprint(w, err)
+	} else {
+		fmt.Println(storyPost)
+		var storyResponse = StoryResponse{Success: true, Message: storyPost.Story}
+		json.NewEncoder(w).Encode(storyResponse)
+	}
+
 }
 
 func handleRequests() {
