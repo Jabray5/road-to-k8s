@@ -1,3 +1,4 @@
+
 build:
 # Build Go and Docker images
 	go build -o bin/logger main.go
@@ -14,7 +15,7 @@ release: build
 
 run:
 # Run latest image in a docker container
-	docker run --name logcontainer jabray/loggerimage:latest
+	docker run --name logcontainer jabray5/logger:latest
 
 deploy:
 # Kubernetes

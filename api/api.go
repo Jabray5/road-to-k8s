@@ -30,28 +30,23 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 func getTime(w http.ResponseWriter, r *http.Request) {
 	t := time.Now()
 	timeResponse := TimeResponse{Time: t.Format("15:04:05"), Date: t.Format("2006-01-02")}
-	byteArray, err := json.Marshal(timeResponse)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Fprint(w, string(byteArray))
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(timeResponse)
 }
 
 func story(w http.ResponseWriter, r *http.Request) {
 	reqBody, _ := ioutil.ReadAll(r.Body)
-
 	var storyPost StoryPost
 
 	err := json.Unmarshal(reqBody, &storyPost)
-
 	if err != nil {
 		fmt.Fprint(w, err)
 	} else {
 		fmt.Println(storyPost)
 		var storyResponse = StoryResponse{Success: true, Message: storyPost.Story}
+		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(storyResponse)
 	}
-
 }
 
 func handleRequests() {
