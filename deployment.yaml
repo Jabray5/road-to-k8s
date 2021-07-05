@@ -24,3 +24,4 @@ spec:
             requests:
               cpu: "120m"
               memory: "100Mi"
+          ports:
