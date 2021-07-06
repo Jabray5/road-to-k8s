@@ -25,3 +25,5 @@ spec:
               cpu: "120m"
               memory: "100Mi"
           ports:
+            - name: loggerport
+              containerPort: 8081

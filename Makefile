@@ -13,10 +13,16 @@ release: build
 	docker push jabray5/logger:latest
 
 
-run:
+docker-run:
 # Run latest image in a docker container
 	docker run --name logcontainer jabray5/logger:latest
 
-deploy:
+k8s-deploy:
 # Kubernetes
 	kubectl apply -f deployment.yaml
+	kubectl apply -f service.yaml
+	@echo service running on port 30000
+
+k8s-delete:
+	kubectl delete svc logger-service
+	kubectl delete deployment logger-deployment
