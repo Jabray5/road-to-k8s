@@ -12,6 +12,7 @@ import (
 type TimeResponse struct {
 	Time string `json:"time"`
 	Date string `json:"date"`
+	Zone string `json:"zone"`
 }
 
 type StoryPost struct {
@@ -29,7 +30,7 @@ func homepage(w http.ResponseWriter, r *http.Request) {
 
 func getTime(w http.ResponseWriter, r *http.Request) {
 	t := time.Now()
-	timeResponse := TimeResponse{Time: t.Format("15:04:05"), Date: t.Format("2006-01-02")}
+	timeResponse := TimeResponse{Time: t.Format("15:04:05"), Date: t.Format("2006-01-02"), Zone: t.Format("MST")}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(timeResponse)
 }

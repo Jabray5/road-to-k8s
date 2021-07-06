@@ -16,17 +16,13 @@ func main() {
 
 	api.StartListening()
 
+	// THIS CURRENTLY DOES NOTHING
 	// Loop indefinitely
 	for {
 		if enableLogging {
 			logTime()
 			wait()
 		}
-
-		// if newMessage {
-		// 	// log the new message
-		// }
-
 	}
 }
 
