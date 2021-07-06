@@ -1,7 +1,7 @@
 
 build:
 # Build Go and Docker images
-	go build -o bin/logger main.go
+# go build -o bin/logger main.go
 	docker build -t logger ./
 
 release: build
@@ -26,3 +26,7 @@ k8s-deploy:
 k8s-delete:
 	kubectl delete svc logger-service
 	kubectl delete deployment logger-deployment
+
+k8s-update:
+# Restart pods with latest image 
+	kubectl rollout restart deployment logger-deployment
