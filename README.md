@@ -38,3 +38,9 @@
 - [ ] Re-enable automatic logs every 10s
 - [ ] Implement some kind of tests
 - [ ] Introduce some persistant data for story endpoint?
+
+- [ ] 7. Expand the /story endpoint with the following:
+* - [ ] The response for POST /story should now return a unique identifier in the JSON as well
+* - [ ] Add to the /story endpoint the functionality to retrieve past stories by the unique identifier. The response should include the time and date when the story has been created as well.
+* - [ ] The stories should be persisted / add a storage solution of your choice
+* - [ ] If one or all pods crash/restart the stories should still be retrievable
