@@ -26,10 +26,10 @@ k8s-deploy:
 	@echo service running on port 30000
 
 k8s-delete:
-	kubectl delete -f pv-claim.yaml
-	kubectl delete -f persistent-volume.yaml
 	kubectl delete svc logger-service
 	kubectl delete deployment logger-deployment
+	kubectl delete -f pv-claim.yaml
+	kubectl delete -f persistent-volume.yaml
 
 k8s-update:
 # Restart pods with latest image 

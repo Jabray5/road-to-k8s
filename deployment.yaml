@@ -32,5 +32,5 @@ spec:
             - name: loggerport
               containerPort: 8081
           volumeMounts:
-            - mountPath: "/usr/share/"
+            - mountPath: "/shared/"
               name: logger-pv-storage

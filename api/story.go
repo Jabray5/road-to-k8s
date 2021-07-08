@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-const FILE_LOCATION = "stories.json"
+const FILE_LOCATION = "shared/stories.json"
 
 type StoryPost struct {
 	Story string `json:"message"`
@@ -19,6 +19,10 @@ type StoryResponse struct {
 	Success bool   `json:"success"`
 	Message string `json:"message"`
 	UID     string `json:"uid"`
+}
+
+type StoryList struct {
+	Stories map[string]StoryPost `json:"stories"`
 }
 
 func storyEndpoint(w http.ResponseWriter, r *http.Request) {
@@ -42,25 +46,33 @@ func storyEndpoint(w http.ResponseWriter, r *http.Request) {
 }
 
 func writeStoryToFile(s StoryPost) {
-	bytes, err := json.Marshal(s)
+	// initialise struct
+	var storyList StoryList
+
+	// read in json data
+	jsonData, err := ioutil.ReadFile(FILE_LOCATION)
+	if os.IsNotExist(err) {
+		os.Create(FILE_LOCATION)
+	} else if err != nil {
+		fmt.Println(err)
+	}
+
+	// populate struct with json data
+	json.Unmarshal(jsonData, &storyList)
+	fmt.Println("Read json file")
+
+	// add new story to json
+	storyList.Stories[s.UID] = s
+
+	// marshal back into byte array
+	bytes, err := json.Marshal(storyList)
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	// Currently not writing proper json
-	// Will probably need to unmarshal the entire thing, append new json, then write back to the file
-	jsonFile, err := os.OpenFile(FILE_LOCATION, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		println(err)
-	}
-	defer jsonFile.Close()
-
-	if _, err := jsonFile.Write(bytes); err != nil {
-		println(err)
-	}
-
-	fmt.Println("Write complete!")
+	// write back to file
+	ioutil.WriteFile(FILE_LOCATION, bytes, 0644)
 }
 
 func makeUID() string {
