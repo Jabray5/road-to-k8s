@@ -16,6 +16,10 @@ spec:
       labels:
         app: logger-deployment
     spec:
+      volumes:
+        - name: logger-pv-storage
+          persistentVolumeClaim:
+            claimName: logger-pv-claim
       containers:
         - name: logger
           imagePullPolicy: Always
@@ -27,3 +31,6 @@ spec:
           ports:
             - name: loggerport
               containerPort: 8081
+          volumeMounts:
+            - mountPath: "/usr/share/"
+              name: logger-pv-storage
