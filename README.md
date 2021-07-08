@@ -35,9 +35,8 @@
 
 ## Extended Features
 - [ ] Return the time in a specified timezone
-- [ ] Re-enable automatic logs every 10s
+- [ ] Re-enable automatic logs every 10s using threads
 - [ ] Implement some kind of tests
-- [ ] Introduce some persistant data for story endpoint?
 
 - [ ] 7. Expand the /story endpoint with the following:
 * - [ ] The response for POST /story should now return a unique identifier in the JSON as well
