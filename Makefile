@@ -19,11 +19,15 @@ docker-run:
 
 k8s-deploy:
 # Kubernetes
+	kubectl apply -f persistent-volume.yaml
+	kubectl apply -f pv-claim.yaml
 	kubectl apply -f deployment.yaml
 	kubectl apply -f service.yaml
 	@echo service running on port 30000
 
 k8s-delete:
+	kubectl delete -f pv-claim.yaml
+	kubectl delete -f persistent-volume.yaml
 	kubectl delete svc logger-service
 	kubectl delete deployment logger-deployment
 
